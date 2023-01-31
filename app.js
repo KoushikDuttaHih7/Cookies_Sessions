@@ -44,15 +44,6 @@ app.use(
 // saveUninitialized: false -> this will also basically ensure that no session gets saved for a request where
 // it doesn't need to be saved because nothing waschanged about it
 
-app.use((req, res, next) => {
-  User.findById("63d8a54ebeb6de9bea159fde")
-    .then((user) => {
-      req.user = user;
-      next();
-    })
-    .catch((err) => console.log(err));
-});
-
 app.use("/admin", adminRoutes.routes);
 app.use(shopRoutes);
 app.use(authRoutes);

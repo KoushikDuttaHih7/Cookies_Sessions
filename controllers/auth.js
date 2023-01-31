@@ -1,3 +1,5 @@
+const User = require("../models/user");
+
 // This is for Login view
 exports.getLogin = (req, res, next) => {
   const isLoggedIn =
@@ -6,12 +8,17 @@ exports.getLogin = (req, res, next) => {
   res.render("auth/login", {
     path: "/login",
     pageTitle: "Login",
-    isAuthenticated: isLoggedIn,
+    isAuthenticated: false,
   });
 };
 
 // This is for Login view
 exports.postLogin = (req, res, next) => {
-  req.session.isLoggedIn = true;
-  res.redirect("/");
+  User.findById("63d8a54ebeb6de9bea159fde")
+    .then((user) => {
+      req.session.isLoggedIn = true;
+      req.session.user = user;
+      res.redirect("/");
+    })
+    .catch((err) => console.log(err));
 };
