@@ -14,7 +14,7 @@ exports.getLogin = (req, res, next) => {
 
 // This is for Login view
 exports.postLogin = (req, res, next) => {
-  User.findById("63d8a54ebeb6de9bea159fde")
+  User.findById("63d8f8df2a80a6c69d0b84ed")
     .then((user) => {
       req.session.isLoggedIn = true;
       req.session.user = user;
