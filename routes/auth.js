@@ -10,4 +10,7 @@ router.get("/login", authController.getLogin);
 // To get logged In
 router.post("/login", authController.postLogin);
 
+// To get logout
+router.post("/logout", authController.postLogout);
+
 module.exports = router;

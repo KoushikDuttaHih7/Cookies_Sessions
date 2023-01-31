@@ -22,3 +22,11 @@ exports.postLogin = (req, res, next) => {
     })
     .catch((err) => console.log(err));
 };
+
+// This is for Logout view
+exports.postLogout = (req, res, next) => {
+  req.session.destroy((err) => {
+    console.log(err);
+    res.redirect("/");
+  });
+};
