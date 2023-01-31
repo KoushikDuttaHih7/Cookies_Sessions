@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use((req, res, next) => {
-  User.findById("63d7985c83399fb849284de3")
+  User.findById("63d8a54ebeb6de9bea159fde")
     .then((user) => {
       req.user = user;
       next();
@@ -36,14 +36,14 @@ app.use(errorController.get404);
 
 mongoose
   .connect(
-    "mongodb+srv://Koushik-Shop:koushik.shop@cluster-shop.yyknzpb.mongodb.net/shop-mongoose?retryWrites=true&w=majority"
+    "mongodb+srv://Koushik-Shop:koushik.shop@cluster-shop.yyknzpb.mongodb.net/shop-cookies?retryWrites=true&w=majority"
   )
   .then((result) => {
     User.findOne().then((user) => {
       if (!user) {
         const user = new User({
-          name: "Koushik",
-          email: "koushik@test.com",
+          name: "Cookies",
+          email: "cookies@test.com",
           cart: {
             items: [],
           },
