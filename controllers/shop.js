@@ -51,7 +51,7 @@ exports.getIndex = (req, res, next) => {
 
 // This is for my cart view
 exports.getCart = (req, res, next) => {
-  req.session.user
+  req.user
     .populate("cart.items.productId")
     // .execPopulate() // .execPopulate() is not a function anymore
     .then((user) => {
@@ -71,7 +71,7 @@ exports.postCart = (req, res, next) => {
   const prodId = req.body.productId;
   Product.findById(prodId)
     .then((product) => {
-      return req.session.user.addToCart(product);
+      return req.user.addToCart(product);
     })
     .then((result) => {
       console.log(result);
@@ -82,7 +82,7 @@ exports.postCart = (req, res, next) => {
 // this is for deleting products from the cart
 exports.postCartDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
-  req.session.user
+  req.user
     .deleteItemFromCart(prodId)
     .then((result) => {
       res.redirect("/cart");
@@ -92,7 +92,7 @@ exports.postCartDeleteProduct = (req, res, next) => {
 
 // This is for my order view
 exports.postOrder = (req, res, next) => {
-  req.session.user
+  req.user
     .populate("cart.items.productId")
     .then((user) => {
       const products = user.cart.items.map((i) => {
